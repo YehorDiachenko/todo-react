@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 // styles
 import './App.css';
 
-// import components
+// components
 import TodoItem from './components/TodoItemComponent';
 
 // json data
 import todosData from "./shared/todosData";
 
-function App() {
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      todos: todosData
+    }
+  }
 
-  const todos = todosData.map((todo) => {
+  render() {
+     const todoItems = this.state.todos.map(todo => <TodoItem key={todo.id} todo={todo} />);
+
     return (
-      <TodoItem key={todo.id} todo={todo} />
+      <div className="todo-list">
+        {todoItems}
+      </div>
     );
-  })
-
-  return (
-    <div className="todo-list">
-      {todos}
-    </div>
-  );
+  }
 }
 
 export default App;
